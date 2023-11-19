@@ -30,7 +30,18 @@ public class LinkedList<T> {
             this.tail.setNext(newNode);
         }
         this.tail = newNode;
-        length++;
+        this.length++;
+    }
+
+    public void prepend(T value) {
+        Node<T> newNode = new Node<>(value);
+        if (this.length == 0) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            newNode.setNext(getHead());
+            this.setHead(newNode);
+        }
     }
 
     public Node<T> removeLast() {
@@ -53,6 +64,54 @@ public class LinkedList<T> {
         return temp;
     }
 
+    public Node<T> removeFirst() {
+        if (this.length == 0) return null;
+        Node<T> temp = this.getHead();
+        head = head.getNext();
+        temp.setNext(null);
+        this.length--;
+        if (this.length == 0) {
+            this.setTail(null);
+        }
+        return temp;
+    }
+
+    public Node<T> get(int index) {
+        if (index < 0 || index >= this.length) {
+            return null;
+        }
+        Node<T> temp = this.getHead();
+        for (int i = 0; i < index; i++) {
+            temp = temp.getNext();
+        }
+        return temp;
+    }
+
+    public boolean set(int index, T value) {
+        Node<T> temp = get(index);
+        if (temp != null) {
+            temp.setValue(value);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean insert(int index, T value) {
+        if (index < 0 || index > length) return false;
+        if (index == 0) {
+            prepend(value);
+            this.length++;
+        } else if (index == this.length) {
+            append(value);
+            this.length++;
+        }
+        Node<T> newNode = new Node<>(value);
+        Node<T> temp = get(index -1);;
+        newNode = temp.getNext();
+        temp.setNext(newNode);
+        this.length++;
+        return true;
+    }
 
     public Node<T> getHead() {
         return head;
