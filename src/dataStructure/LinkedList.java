@@ -12,14 +12,12 @@ public class LinkedList<T> {
         this.length = 1;
     }
 
-    public T printList() {
-        Node<T> temp = this.head;
-        T value = null;
+    public void printList() {
+        Node<T> temp = this.getHead();
         while (temp != null) {
-            value = temp.getValue();
+            System.out.print(temp.getValue() + "--> ");
             temp = temp.getNext();
         }
-        return value;
     }
 
     public void append(T value) {
@@ -106,7 +104,7 @@ public class LinkedList<T> {
             this.length++;
         }
         Node<T> newNode = new Node<>(value);
-        Node<T> temp = get(index -1);;
+        Node<T> temp = get(index - 1);
         newNode = temp.getNext();
         temp.setNext(newNode);
         this.length++;
