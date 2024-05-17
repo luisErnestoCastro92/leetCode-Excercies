@@ -2,20 +2,18 @@ package leetcode;
 
 public class ConcatenationOfArray {
 
-    public int[] getConcatenation(int[] nums) {
-
+    public static int[] getConcatenation(int[] nums) {
         int[] ans = new int[nums.length * 2];
-        for (int i = nums.length; i < ans.length; i++) {
-            ans[i - nums.length] = nums[i - nums.length];
-            ans[i] = nums[i - nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            ans[i] = nums[i];
+            ans[nums.length + i] = nums[i];
         }
         return ans;
     }
 
     public static void main(String[] args) {
-        ConcatenationOfArray concatenationOfArray = new ConcatenationOfArray();
-        int[] nums = {1, 2, 3, 4};
-        int[] ans = concatenationOfArray.getConcatenation(nums);
+        int[] nums = {1, 2, 1};
+        int[] ans = ConcatenationOfArray.getConcatenation(nums);
         for (int i = 0; i < ans.length; i++) {
             System.out.print("[" + ans[i] + "]");
         }
